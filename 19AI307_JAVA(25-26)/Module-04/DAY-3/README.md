@@ -1,100 +1,148 @@
-# Ex.No:4(C)  COMPOSITION IN JAVA
+# Ex.No:4(D) DESIGN PATTERN -- ABSTRACT FACTORY
 
 ## QUESTION:
-Create animals from two regions: "Africa" and "Asia". Use Abstract Factory to create families of animals (Herbivore, Carnivore). Print the interaction result.
+Write a Java program to implement the **Abstract Factory Design Pattern** to create UI components (Button and Checkbox) for different themes.
 
-
+---
 
 ## AIM:
-To write a Java program demonstrating Composition and Abstract Factory Pattern by creating animal families of different regions and displaying interactions between herbivores and carnivores.
+To write a Java program to demonstrate the **Abstract Factory Design Pattern** by creating related objects without specifying their concrete classes.
+
+---
 
 ## ALGORITHM :
-1.	Start the program.
-2.	Import the necessary package 'java.util'
-3.	Create interfaces Herbivore and Carnivore.
-4. Create concrete animal classes (e.g., Wildebeest, Lion, Deer, Tiger) implementing those interfaces.
-5. Create an abstract factory class for producing families of animals.
-6. Implement region-based factories (AfricaFactory, AsiaFactory).
-7. In the main program, instantiate factories and show interactions.
-8. Print the result.
-9. Stop the program.
+1. Start the program.  
+2. Import the necessary package `java.util`.  
+3. Create interfaces `Button` and `Checkbox` with method `render()`.  
+4. Create concrete classes `DarkButton`, `LightButton`, `DarkCheckbox`, and `LightCheckbox`.  
+5. Implement the `render()` method in each class.  
+6. Create an interface `UIFactory` with methods `createButton()` and `createCheckbox()`.  
+7. Create concrete factory classes `DarkThemeFactory` and `LightThemeFactory`.  
+8. Implement factory methods to return corresponding objects.  
+9. In the main class, read the theme input from the user.  
+10. Based on input, create the appropriate factory object.  
+11. Use the factory to create UI components.  
+12. Call the `render()` methods to display output.  
+13. Stop the program.
+
+---
 
 ## PROGRAM:
- ```
-/*
-Program to implement a Composition Concepts in Java
-Developed by: PAVITHRAN S
-RegisterNumber:212223240113
-*/
-```
 
-## SOURCE CODE:
-```
+```java
+/*
+Program to implement Abstract Factory Pattern using Java
+Developed by: PAVITHRAN S
+RegisterNumber: 212223240113
+*/
+
 import java.util.Scanner;
 
-interface Herbivore {}
-interface Carnivore {
-    void eat(Herbivore h);
-}
+interface Button { void render(); }
+interface Checkbox { void render(); }
 
-class Wildebeest implements Herbivore {}
-class Lion implements Carnivore {
-    public void eat(Herbivore h) {
-        System.out.println("Lion eats Wildebeest");
+// Concrete Button classes
+class DarkButton implements Button {
+    public void render() {
+        System.out.println("Dark Button created");
     }
 }
 
-class Buffalo implements Herbivore {}
-class Tiger implements Carnivore {
-    public void eat(Herbivore h) {
-        System.out.println("Tiger eats Buffalo");
+class LightButton implements Button {
+    public void render() {
+        System.out.println("Light Button created");
     }
 }
 
-interface AnimalFactory {
-    Herbivore createHerbivore();
-    Carnivore createCarnivore();
+// Concrete Checkbox classes
+class DarkCheckbox implements Checkbox {
+    public void render() {
+        System.out.println("Dark Checkbox created");
+    }
 }
 
-class AfricaFactory implements AnimalFactory {
-    public Herbivore createHerbivore() { return new Wildebeest(); }
-    public Carnivore createCarnivore() { return new Lion(); }
+class LightCheckbox implements Checkbox {
+    public void render() {
+        System.out.println("Light Checkbox created");
+    }
 }
 
-class AsiaFactory implements AnimalFactory {
-    public Herbivore createHerbivore() { return new Buffalo(); }
-    public Carnivore createCarnivore() { return new Tiger(); }
+// Abstract Factory
+interface UIFactory {
+    Button createButton();
+    Checkbox createCheckbox();
 }
 
+// Concrete Factories
+class DarkThemeFactory implements UIFactory {
+    public Button createButton() {
+        return new DarkButton();
+    }
+
+    public Checkbox createCheckbox() {
+        return new DarkCheckbox();
+    }
+}
+
+class LightThemeFactory implements UIFactory {
+    public Button createButton() {
+        return new LightButton();
+    }
+
+    public Checkbox createCheckbox() {
+        return new LightCheckbox();
+    }
+}
+
+// Main class
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String region = sc.nextLine().toLowerCase();
-        AnimalFactory factory;
+        Scanner scanner = new Scanner(System.in);
 
-        if (region.equals("africa")) factory = new AfricaFactory();
-        else if (region.equals("asia")) factory = new AsiaFactory();
+        String theme = scanner.nextLine().toLowerCase();
+
+        UIFactory factory;
+
+        if (theme.equals("dark"))
+            factory = new DarkThemeFactory();
+        else if (theme.equals("light"))
+            factory = new LightThemeFactory();
         else {
-            System.out.println("Invalid region");
+            System.out.println("Invalid theme");
             return;
         }
 
-        Carnivore carn = factory.createCarnivore();
-        Herbivore herb = factory.createHerbivore();
-        carn.eat(herb);
+        factory.createButton().render();
+        factory.createCheckbox().render();
     }
 }
 ```
 
+---
 
+## SOURCE CODE:
 
+Compile the program using
 
+```
+javac Main.java
+```
+
+Run the program using
+
+```
+java Main
+```
+
+---
 
 ## OUTPUT:
 
-![java43](https://github.com/ABINAYA-27-76/19AI307_ODD-25-26-/blob/8b4be1e27b6fb5da0aa68915801ab1e6c9c7174e/19AI307_JAVA(25-26)/Module-04/DAY-3/java43.png)
+
+<img width="545" height="266" alt="image" src="https://github.com/user-attachments/assets/00ef4853-0c0d-4b06-af77-d3d09101d1aa" />
+
+---
 
 ## RESULT:
-Thus, the program using Composition and Abstract Factory Pattern was successfully implemented and executed to create animal interactions for African and Asian regions.
 
-
+Thus, the Java program to implement the **Abstract Factory Design Pattern** was executed successfully and the output was verified.
