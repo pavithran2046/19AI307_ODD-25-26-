@@ -1,66 +1,57 @@
-# Ex.No:5(C) FILE HANDLING USING JAVA
+# Ex.No:5(D) THREAD PRIORITY
 
 ## QUESTION:
-Write a Java program to perform **file handling operations** and count the number of words in a file.
+Write a Java program to demonstrate **thread priority**.
 
 
 ## AIM:
-To write a Java program to demonstrate **file handling using FileWriter and BufferedReader** and count the number of words in a file.
+To write a Java program to demonstrate **setting and displaying thread priorities**.
 
 
 ## ALGORITHM :
 1. Start the program.  
-2. Import the necessary packages `java.io` and `java.util`.  
+2. Import the necessary package `java.util`.  
 3. Create a class `Main`.  
 4. Inside the `main()` method create a `Scanner` object.  
-5. Read a string input from the user.  
-6. Create a `FileWriter` object and write the input into a file (`sample.txt`).  
-7. Close the file after writing.  
-8. Open the file using `FileReader` and wrap it with `BufferedReader`.  
-9. Initialize a variable `count` to 0.  
-10. Read the file line by line using `readLine()`.  
-11. Split each line into words using `split(" ")`.  
-12. Count the number of words and store in `count`.  
-13. Close the file after reading.  
-14. Display the total number of words.  
-15. Stop the program.
+5. Read two thread names from the user.  
+6. Create two thread objects `t1` and `t2`.  
+7. Set the names of the threads using `setName()`.  
+8. Assign priorities using `setPriority()`.  
+9. Display thread details using `System.out.println()`.  
+10. Stop the program.
 
 
 ## PROGRAM:
 
 ```java
 /*
-Program to implement File Handling using Java
-Developed by: PAVITHRAN 
+Program to implement Thread Priority using Java
+Developed by:PAVITHRAN S
 RegisterNumber: 212223240113
 */
 
-import java.io.*;
 import java.util.Scanner;
 
-public class Main{
-    public static void main(String[] args) throws Exception{
+public class Main {
+
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        String text = sc.nextLine();
+        String name1 = sc.nextLine();
+        String name2 = sc.nextLine();
         
-        FileWriter fw = new FileWriter("sample.txt");
-        fw.write(text);
-        fw.close();
+        Thread t1 = new Thread();
+        Thread t2 = new Thread();
         
-        BufferedReader br = new BufferedReader(new FileReader("sample.txt"));
-
-        int count = 0;
+        t1.setName(name1);
+        t2.setName(name2);
         
-        while((text = br.readLine()) != null){
-            String[] words = text.split(" ");
-            count += words.length;
-        }
+        t1.setPriority(4);
+        t2.setPriority(2);
         
-        br.close();
-        
-        System.out.println("Number of words in the file: " + count);
+        System.out.println(t1);
+        System.out.println(t2);
     }
 }
 ```
@@ -80,15 +71,13 @@ Run the program using
 java Main
 ```
 
----
 
 ## OUTPUT:
 
-<img width="947" height="229" alt="image" src="https://github.com/user-attachments/assets/0d385bd9-50d5-495d-8614-7cc7159f88c1" />
+<img width="698" height="212" alt="image" src="https://github.com/user-attachments/assets/a2e9cb3f-7ab1-4769-8998-8516070364e0" />
 
 
----
 
 ## RESULT:
 
-Thus, the Java program to demonstrate **file handling and word count using FileWriter and BufferedReader** was executed successfully and the output was verified.
+Thus, the Java program to demonstrate **thread priority** was executed successfully and the output was verified.
